@@ -28,13 +28,13 @@ class Concert
      * @ORM\ManyToMany(targetEntity="App\Entity\Band", inversedBy="concerts")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ArrayCollection $bands;
+    private ?ArrayCollection $bands;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Room", mappedBy="concerts")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ArrayCollection $rooms;
+    private ?ArrayCollection $rooms;
 
     /**
      *
@@ -81,10 +81,10 @@ class Concert
     }
 
     /**
-     * @param Band $band
+     * @param Band|null $band
      * @return $this
      */
-    public function addBand(Band $band): self
+    public function addBand(?Band $band): self
     {
         if (!$this->bands->contains($band)) {
             $this->bands[] = $band;
@@ -94,10 +94,10 @@ class Concert
     }
 
     /**
-     * @param Band $band
+     * @param Band|null $band
      * @return $this
      */
-    public function removeBand(Band $band): self
+    public function removeBand(?Band $band): self
     {
         $this->bands->removeElement($band);
 
@@ -113,10 +113,10 @@ class Concert
     }
 
     /**
-     * @param Room $room
+     * @param Room|null $room
      * @return $this
      */
-    public function addRoom(Room $room): self
+    public function addRoom(?Room $room): self
     {
         if (!$this->rooms->contains($room)) {
             $this->rooms[] = $room;
@@ -127,10 +127,10 @@ class Concert
     }
 
     /**
-     * @param Room $room
+     * @param Room|null $room
      * @return $this
      */
-    public function removeRoom(Room $room): self
+    public function removeRoom(?Room $room): self
     {
         if ($this->rooms->removeElement($room)) {
             $room->removeConcert($this);

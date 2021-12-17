@@ -44,13 +44,13 @@ class Band
      * @ORM\ManyToMany(targetEntity="App\Entity\Artist", inversedBy="bands")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ArrayCollection $artists;
+    private ?ArrayCollection $artists;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Concert", mappedBy="bands")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ArrayCollection $concerts;
+    private ?ArrayCollection $concerts;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Picture", inversedBy="bands")
@@ -132,8 +132,6 @@ class Band
         return $this;
     }
 
-
-
     /**
      * @return Collection|Artist[]
      */
@@ -142,7 +140,11 @@ class Band
         return $this->artists;
     }
 
-    public function addArtist(Artist $artist): self
+    /**
+     * @param Artist|null $artist
+     * @return $this
+     */
+    public function addArtist(?Artist $artist): self
     {
         if (!$this->artists->contains($artist)) {
             $this->artists[] = $artist;
@@ -152,10 +154,10 @@ class Band
     }
 
     /**
-     * @param Artist $artist
+     * @param Artist|null $artist
      * @return $this
      */
-    public function removeArtist(Artist $artist): self
+    public function removeArtist(?Artist $artist): self
     {
         $this->artists->removeElement($artist);
 
@@ -171,10 +173,10 @@ class Band
     }
 
     /**
-     * @param Concert $concert
+     * @param Concert|null $concert
      * @return $this
      */
-    public function addConcert(Concert $concert): self
+    public function addConcert(?Concert $concert): self
     {
         if (!$this->concerts->contains($concert)) {
             $this->concerts[] = $concert;
@@ -185,10 +187,10 @@ class Band
     }
 
     /**
-     * @param Concert $concert
+     * @param Concert|null $concert
      * @return $this
      */
-    public function removeConcert(Concert $concert): self
+    public function removeConcert(?Concert $concert): self
     {
         if ($this->concerts->removeElement($concert)) {
             $concert->removeBand($this);

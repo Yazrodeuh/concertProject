@@ -80,10 +80,10 @@ class Room
     }
 
     /**
-     * @param Concert $concert
+     * @param Concert|null $concert
      * @return $this
      */
-    public function addConcert(Concert $concert): self
+    public function addConcert(?Concert $concert): self
     {
         if (!$this->concerts->contains($concert)) {
             $this->concerts[] = $concert;
@@ -93,10 +93,10 @@ class Room
     }
 
     /**
-     * @param Concert $concert
+     * @param Concert|null $concert
      * @return $this
      */
-    public function removeConcert(Concert $concert): self
+    public function removeConcert(?Concert $concert): self
     {
         $this->concerts->removeElement($concert);
 

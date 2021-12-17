@@ -74,10 +74,10 @@ class Organizer
     }
 
     /**
-     * @param Room $room
+     * @param Room|null $room
      * @return $this
      */
-    public function addRoom(Room $room): self
+    public function addRoom(?Room $room): self
     {
         if (!$this->rooms->contains($room)) {
             $this->rooms[] = $room;
@@ -88,10 +88,10 @@ class Organizer
     }
 
     /**
-     * @param Room $room
+     * @param Room|null $room
      * @return $this
      */
-    public function removeRoom(Room $room): self
+    public function removeRoom(?Room $room): self
     {
         if ($this->rooms->removeElement($room)) {
             // set the owning side to null (unless already changed)

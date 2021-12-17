@@ -127,10 +127,10 @@ class Artist
     }
 
     /**
-     * @param Band $band
+     * @param Band|null $band
      * @return $this
      */
-    public function addBand(Band $band): self
+    public function addBand(?Band $band): self
     {
         if (!$this->bands->contains($band)) {
             $this->bands[] = $band;
@@ -141,10 +141,10 @@ class Artist
     }
 
     /**
-     * @param Band $band
+     * @param Band|null $band
      * @return $this
      */
-    public function removeBand(Band $band): self
+    public function removeBand(?Band $band): self
     {
         if ($this->bands->removeElement($band)) {
             $band->removeArtist($this);
