@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ConcertRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,6 +43,21 @@ class Concert
      * @ORM\JoinColumn(nullable=true)
      */
     private $room;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private ?DateTimeInterface $startTime;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private ?DateTimeInterface $endTime;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="concerts")
+     */
+    private $picture;
 
     /**
      *
@@ -139,6 +155,42 @@ class Concert
     public function setRoom(?Room $room): self
     {
         $this->room = $room;
+
+        return $this;
+    }
+
+    public function getStartTime(): ?DateTimeInterface
+    {
+        return $this->startTime;
+    }
+
+    public function setStartTime(DateTimeInterface $startTime): self
+    {
+        $this->startTime = $startTime;
+
+        return $this;
+    }
+
+    public function getEndTime(): ?DateTimeInterface
+    {
+        return $this->endTime;
+    }
+
+    public function setEndTime(DateTimeInterface $endTime): self
+    {
+        $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?Picture $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

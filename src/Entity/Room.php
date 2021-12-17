@@ -37,6 +37,11 @@ class Room
     private Organizer $organizer;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="rooms")
+     */
+    private $picture;
+
+    /**
      *
      */
     public function __construct()
@@ -118,6 +123,18 @@ class Room
     public function setOrganizer(?Organizer $organizer): self
     {
         $this->organizer = $organizer;
+
+        return $this;
+    }
+
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?Picture $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
