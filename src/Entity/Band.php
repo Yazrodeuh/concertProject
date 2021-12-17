@@ -51,7 +51,7 @@ class Band
     private ArrayCollection $concerts;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="bands")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", inversedBy="bands")
      */
     private ?Picture $picture;
 
