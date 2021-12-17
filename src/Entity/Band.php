@@ -41,7 +41,7 @@ class Band
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Artist", mappedBy="bands")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Artist", inversedBy="bands")
      */
     private ArrayCollection $artists;
 
@@ -49,6 +49,11 @@ class Band
      * @ORM\ManyToMany(targetEntity="App\Entity\Concert", mappedBy="bands")
      */
     private ArrayCollection $concerts;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="bands")
+     */
+    private ?Picture $picture;
 
     /**
      *
@@ -185,6 +190,18 @@ class Band
         if ($this->concerts->removeElement($concert)) {
             $concert->removeBand($this);
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?Picture $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

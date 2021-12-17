@@ -34,6 +34,11 @@ class Picture
      */
     private string $url;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Band", mappedBy="picture")
+     */
+    private ArrayCollection $bands;
+
     public function __construct()
     {
         $this->bands = new ArrayCollection();
@@ -77,6 +82,36 @@ class Picture
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Band[]
+     */
+    public function getBands(): Collection
+    {
+        return $this->bands;
+    }
+
+    public function addBand(Band $band): self
+    {
+        if (!$this->bands->contains($band)) {
+            $this->bands[] = $band;
+            $band->setPicture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBand(Band $band): self
+    {
+        if ($this->bands->removeElement($band)) {
+            // set the owning side to null (unless already changed)
+            if ($band->getPicture() === $this) {
+                $band->setPicture(null);
+            }
+        }
 
         return $this;
     }
