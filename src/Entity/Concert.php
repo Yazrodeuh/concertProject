@@ -20,6 +20,13 @@ class Concert
     private $id;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=100)
+     */
+    private string $name;
+
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private bool $full;
@@ -28,13 +35,13 @@ class Concert
      * @ORM\ManyToMany(targetEntity="App\Entity\Band", inversedBy="concerts")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ?ArrayCollection $bands;
+    private $bands;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Room", mappedBy="concerts")
+     * @ORM\ManyToOne (targetEntity="App\Entity\Room", inversedBy="concerts")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ?ArrayCollection $rooms;
+    private $room;
 
     /**
      *
@@ -104,38 +111,36 @@ class Concert
         return $this;
     }
 
+
     /**
-     * @return Collection|Room[]
+     * @return string
      */
-    public function getRooms(): Collection
+    public function getName(): string
     {
-        return $this->rooms;
+        return $this->name;
     }
 
     /**
-     * @param Room|null $room
-     * @return $this
+     * @param string $name
+     * @return Concert
      */
-    public function addRoom(?Room $room): self
+    public function setName(string $name): Concert
     {
-        if (!$this->rooms->contains($room)) {
-            $this->rooms[] = $room;
-            $room->addConcert($this);
-        }
+        $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @param Room|null $room
-     * @return $this
-     */
-    public function removeRoom(?Room $room): self
+    public function getRoom(): ?Room
     {
-        if ($this->rooms->removeElement($room)) {
-            $room->removeConcert($this);
-        }
+        return $this->room;
+    }
+
+    public function setRoom(?Room $room): self
+    {
+        $this->room = $room;
 
         return $this;
     }
+
 }

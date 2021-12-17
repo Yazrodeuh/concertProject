@@ -44,13 +44,13 @@ class Band
      * @ORM\ManyToMany(targetEntity="App\Entity\Artist", inversedBy="bands")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ?ArrayCollection $artists;
+    private $artists;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Concert", mappedBy="bands")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ?ArrayCollection $concerts;
+    private $concerts;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Picture", inversedBy="bands")

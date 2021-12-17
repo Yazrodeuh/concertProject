@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ArtistRepository;
-use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -35,16 +34,16 @@ class Artist
     private string $firstName;
 
     /**
-     * @var DateTime|null
+     * @var DateTimeInterface|null
      * @ORM\Column(type="date", nullable=true)
      */
-    private ?DateTime $birthday;
+    private ?DateTimeInterface $birthday;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Band", mappedBy="artists")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ArrayCollection $bands;
+    private $bands;
 
     /**
      *
@@ -121,7 +120,7 @@ class Artist
     /**
      * @return Collection|Band[]
      */
-    public function getBands(): Collection
+    public function getBands(): ?Collection
     {
         return $this->bands;
     }

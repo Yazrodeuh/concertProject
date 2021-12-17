@@ -28,7 +28,7 @@ class Organizer
      * @ORM\OneToMany(targetEntity="App\Entity\Room", mappedBy="organizer")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ArrayCollection $rooms;
+    private $rooms;
 
     /**
      *

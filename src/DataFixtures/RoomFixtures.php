@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Concert;
 use App\Entity\Organizer;
 use App\Entity\Room;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -11,23 +12,22 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class OrganizerFixtures extends Fixture implements FixtureInterface, ContainerAwareInterface
+class RoomFixtures extends Fixture implements FixtureInterface, ContainerAwareInterface, DependentFixtureInterface
 {
 
     private ContainerInterface $container;
 
-
     public function load(ObjectManager $manager): void
     {
 
-        $repRoom = $this->container->get('doctrine.orm.entity_manager')->getRepository(Room::class);
+        $repConcert = $this->container->get("doctrine.orm.entity_manager")->getRepository(Concert::class);
+        $repOrganizer = $this->container->get("doctrine.orm.entity_manager")->getRepository(Organizer::class);
 
-        $organiser = new Organizer();
+        $room = new Room();
+        $room->setName("room1");
+        $room->setOrganizer($repOrganizer->findOneBy(array('name' => "organizer1")));
 
-        $organiser->setName("organizer1");
-
-
-        $manager->persist($organiser);
+        $manager->persist($room);
 
         $manager->flush();
     }
@@ -37,4 +37,10 @@ class OrganizerFixtures extends Fixture implements FixtureInterface, ContainerAw
         $this->container = $container;
     }
 
+    public function getDependencies() :array
+    {
+        return [
+            OrganizerFixtures::class
+        ];
+    }
 }
