@@ -194,11 +194,18 @@ class Band
         return $this;
     }
 
+    /**
+     * @return Picture|null
+     */
     public function getPicture(): ?Picture
     {
         return $this->picture;
     }
 
+    /**
+     * @param Picture|null $picture
+     * @return $this
+     */
     public function setPicture(?Picture $picture): self
     {
         $this->picture = $picture;

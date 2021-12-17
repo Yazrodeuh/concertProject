@@ -44,17 +44,26 @@ class Picture
         $this->bands = new ArrayCollection();
     }
 
-
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -62,11 +71,18 @@ class Picture
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAlternativeName(): ?string
     {
         return $this->alternativeName;
     }
 
+    /**
+     * @param string $alternativeName
+     * @return $this
+     */
     public function setAlternativeName(string $alternativeName): self
     {
         $this->alternativeName = $alternativeName;
@@ -74,11 +90,18 @@ class Picture
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUrl(): ?string
     {
         return $this->url;
     }
 
+    /**
+     * @param string $url
+     * @return $this
+     */
     public function setUrl(string $url): self
     {
         $this->url = $url;
@@ -94,6 +117,10 @@ class Picture
         return $this->bands;
     }
 
+    /**
+     * @param Band $band
+     * @return $this
+     */
     public function addBand(Band $band): self
     {
         if (!$this->bands->contains($band)) {
@@ -104,6 +131,10 @@ class Picture
         return $this;
     }
 
+    /**
+     * @param Band $band
+     * @return $this
+     */
     public function removeBand(Band $band): self
     {
         if ($this->bands->removeElement($band)) {
@@ -115,5 +146,4 @@ class Picture
 
         return $this;
     }
-
 }
