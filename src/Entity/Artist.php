@@ -42,6 +42,7 @@ class Artist
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Band", mappedBy="artists")
+     * @ORM\JoinColumn(nullable=true)
      */
     private ArrayCollection $bands;
 

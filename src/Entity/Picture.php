@@ -36,9 +36,13 @@ class Picture
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Band", mappedBy="picture")
+     * @ORM\JoinColumn(nullable=true)
      */
     private ArrayCollection $bands;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->bands = new ArrayCollection();

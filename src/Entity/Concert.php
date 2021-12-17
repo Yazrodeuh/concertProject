@@ -26,11 +26,13 @@ class Concert
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Band", inversedBy="concerts")
+     * @ORM\JoinColumn(nullable=true)
      */
     private ArrayCollection $bands;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Room", mappedBy="concerts")
+     * @ORM\JoinColumn(nullable=true)
      */
     private ArrayCollection $rooms;
 
