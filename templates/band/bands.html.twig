@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConcertController!{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+
+        <div class="my-2 text-center">
+            <h1>Bands</h1>
+        </div>
+
+        <div>
+            <div class="w-100 d-flex justify-content-center row g-4 m-auto py-3">
+                {% for band in bandsInfo %}
+                    <div class="col-xl-4  col-lg-6 col-sm-12">
+                        <div class="card h-100 border">
+                            <div class="card-header text-center">
+                                <h2>{{ band.name }}</h2>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    Style : {{ band.style }}
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ path('band', {"bandName": band.name}) }}">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}
