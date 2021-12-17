@@ -25,12 +25,12 @@ class Concert
     private bool $full;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Band::class, inversedBy="concerts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Band", inversedBy="concerts")
      */
     private ArrayCollection $bands;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Room::class, mappedBy="concerts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Room", mappedBy="concerts")
      */
     private ArrayCollection $rooms;
 

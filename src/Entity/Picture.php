@@ -13,12 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Picture
 {
     /**
-     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -34,11 +33,6 @@ class Picture
      * @ORM\Column(type="text")
      */
     private string $url;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Band", mappedBy="picture")
-     */
-    private ArrayCollection $bands;
 
     public function __construct()
     {

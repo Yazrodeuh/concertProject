@@ -41,7 +41,7 @@ class Artist
     private ?DateTime $birthday;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="artists")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Band", mappedBy="artists")
      */
     private ArrayCollection $bands;
 

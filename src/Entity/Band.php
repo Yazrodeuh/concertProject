@@ -39,10 +39,6 @@ class Band
      */
     private string $style;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", mappedBy="bands")
-     */
-    private Picture $picture;//TODO Problem
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Artist", mappedBy="bands")
@@ -50,7 +46,7 @@ class Band
     private ArrayCollection $artists;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Concert::class, mappedBy="bands")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Concert", mappedBy="bands")
      */
     private ArrayCollection $concerts;
 

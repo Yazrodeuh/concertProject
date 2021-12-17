@@ -25,7 +25,7 @@ class Organizer
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Room::class, mappedBy="organizer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Room", mappedBy="organizer")
      */
     private ArrayCollection $rooms;
 
