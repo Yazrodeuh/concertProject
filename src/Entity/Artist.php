@@ -23,15 +23,15 @@ class Artist
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
-    private string $lastName;
+    private string $name;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private string $firstName;
+    private string $job;
 
     /**
      * @var DateTimeInterface|null
@@ -44,6 +44,11 @@ class Artist
      * @ORM\JoinColumn(nullable=true)
      */
     private $bands;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="artists")
+     */
+    private $picture;
 
     /**
      *
@@ -61,42 +66,6 @@ class Artist
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     * @return $this
-     */
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
-     * @return $this
-     */
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
 
     /**
      * @return DateTimeInterface|null
@@ -148,6 +117,42 @@ class Artist
         if ($this->bands->removeElement($band)) {
             $band->removeArtist($this);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getJob(): ?string
+    {
+        return $this->job;
+    }
+
+    public function setJob(string $job): self
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?Picture $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

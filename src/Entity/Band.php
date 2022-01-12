@@ -23,7 +23,7 @@ class Band
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private string $name;
 
@@ -34,14 +34,14 @@ class Band
     private int $membersNumber;
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $style;
+    private ?string $style;
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Artist", inversedBy="bands")
+     * @ORM\ManyToMany(targetEntity=Artist::class, inversedBy="bands")
      * @ORM\JoinColumn(nullable=true)
      */
     private $artists;
@@ -57,6 +57,11 @@ class Band
      * @ORM\JoinColumn(nullable=true)
      */
     private ?Picture $picture;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $urlName;
 
     /**
      *
@@ -78,7 +83,7 @@ class Band
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -113,24 +118,7 @@ class Band
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getStyle(): string
-    {
-        return $this->style;
-    }
 
-    /**
-     * @param string $style
-     * @return $this
-     */
-    public function setStyle(string $style): self
-    {
-        $this->style = $style;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Artist[]
@@ -214,6 +202,37 @@ class Band
     public function setPicture(?Picture $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStyle(): ?string
+    {
+        return $this->style;
+    }
+
+    /**
+     * @param string|null $style
+     * @return $this
+     */
+    public function setStyle(?string $style): self
+    {
+        $this->style = $style;
+
+        return $this;
+    }
+
+    public function getUrlName(): ?string
+    {
+        return $this->urlName;
+    }
+
+    public function setUrlName(string $urlName): self
+    {
+        $this->urlName = $urlName;
 
         return $this;
     }

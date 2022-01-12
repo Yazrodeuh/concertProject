@@ -11,7 +11,11 @@ class PictureFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-
+        $picture = new Picture();
+        $picture->setUrl('/img/artists/nekfeu.jpg');
+        $picture->setName('nekfeu');
+        $picture->setAlternativeName('alternativename');
+        $manager->persist($picture);
 
         $manager->flush();
     }

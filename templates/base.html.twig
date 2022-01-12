@@ -16,10 +16,15 @@
     </head>
     <body>
 
+        {% include 'svg.html.twig' %}
         {% include 'navBar.html.twig' %}
 
         {% block body %}
             <h1>Hello</h1>
         {% endblock %}
+
+        <footer>
+            {% include 'footer.html.twig' %}
+        </footer>
     </body>
 </html>

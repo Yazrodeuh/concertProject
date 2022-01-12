@@ -23,13 +23,13 @@ class ConcertFixtures extends Fixture implements FixtureInterface, DependentFixt
 
 
         $concert = new Concert();
-
-        $concert->setName("concert1");
+        $concert->setName("Dua Lipa et Angèle en concert");
         $concert->setFull(false);
-        $concert->addBand($repBand->findOneBy(array("name" =>"bandName1")));
+        $concert->addBand($repBand->findOneBy(array("urlName" =>"dualipa-angele")));
         $concert->setRoom($repRoom->findOneBy(array("name"=> "room1")));
-        $concert->setStartTime(DateTime::createFromFormat("d/m/Y G:i", "24/05/2030 21:30"));
-        $concert->setEndTime(DateTime::createFromFormat("d/m/Y G:i", "25/05/2030 00:30"));
+        $concert->setStartTime("20:00");
+        $concert->setEndTime("23:50");
+        $concert->setDay(DateTime::createFromFormat("d/m/Y", "24/05/2010"));
 
         $manager->persist($concert);
 

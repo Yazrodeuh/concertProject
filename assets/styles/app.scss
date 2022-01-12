@@ -1,2 +1,6 @@
 
 @import "~bootstrap/scss/bootstrap";
+
+.bg-img-test img{
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 30% 100%);
+}

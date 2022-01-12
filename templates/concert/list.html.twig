@@ -3,18 +3,47 @@
 {% block title %}Hello ConcertController!{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
 
-    <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code><a href="{{ '/Users/maxime/OneDrive/IUT/LP_APIDAE/Symfony/concertProject/src/Controller/ConcertController.php'|file_link(0) }}">src/Controller/ConcertController.php</a></code></li>
-            <li>Your template at <code><a href="{{ '/Users/maxime/OneDrive/IUT/LP_APIDAE/Symfony/concertProject/templates/concert/list.html.twig'|file_link(0) }}">templates/concert/list.html.twig</a></code></li>
-        </ul>
+    <div class="container my-5">
+
+        <div class="text-center bg-img-test position-relative">
+            <div class="position-absolute d-flex align-items-center h-100" style="left: 15rem">
+                <h1 class="display-3">Concerts</h1>
+            </div>
+            <img src="{{ asset('img/concert/concert.jpg') }}" width="800rem" alt="">
+        </div>
+
+        <table class="table table-hover table-sm">
+            <caption>List of concerts</caption>
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Bands</th>
+                <th scope="col">Day</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for concert in concerts %}
+                <tr>
+                    <td>{{ concert.name }}</td>
+                    <td>{{ dump(concert.bands) }}</td>
+                    <td>{{ concert.day | date('d/m/Y') }}</td>
+                </tr>
+
+            {% endfor %}
+
+
+
+            </tbody>
+        </table>
+
+
+
+        <div class="text-center">
+            <a href="{{ path('concert_create') }}" class="btn btn-primary rounded-pill">Create a concert</a>
+        </div>
     </div>
+
+
 {% endblock %}

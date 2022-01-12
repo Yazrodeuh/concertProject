@@ -16,14 +16,17 @@
                 {% for artist in bandInfos.artists %}
                     <div class="col-xl-4  col-lg-6 col-sm-12">
                         <div class="card h-100 border">
+                            {% if artist.picture is not null %}
+                                <img src="{{ artist.picture.url }}" class="card-img-top" alt="...">
+                            {% endif %}
                             <div class="card-body">
                                 <div>
-                                    <h2 class="h5">{{ artist.firstName }} {{ artist.lastName }}</h2>
+                                    <h2 class="h5">{{ artist.name }}</h2>
                                     <div>Born in {{ artist.birthday | date("d-m-Y") }}.</div>
                                 </div>
                             </div>
                             <div class="card-footer">
-
+                                {{ artist.job }}
                             </div>
 
                         </div>

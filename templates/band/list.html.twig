@@ -12,7 +12,7 @@
         </div>
 
         <div>
-            <div class="w-100 d-flex justify-content-center row g-4 m-auto py-3">
+            <div class="w-100 d-flex justify-content-start row g-4 m-auto py-3">
                 {% for band in bandsInfo %}
                     <div class="col-xl-4  col-lg-6 col-sm-12">
                         <div class="card h-100 border">
@@ -20,12 +20,14 @@
                                 <h2>{{ band.name }}</h2>
                             </div>
                             <div class="card-body">
-                                <div>
-                                    Style : {{ band.style }}
-                                </div>
+                                {% if band.style is not null %}
+                                    <div>
+                                        Style : {{ band.style }}
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class="card-footer">
-                                <a href="{{ path('band', {"bandName": band.name}) }}">Learn more</a>
+                                <a href="{{ path('band_show', {"bandName": (band.urlName) }) }}">Learn more</a>
                             </div>
                         </div>
                     </div>

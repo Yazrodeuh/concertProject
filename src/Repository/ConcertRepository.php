@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Concert;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +48,12 @@ class ConcertRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findOldConcert(){
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.day < \'' .  date_format(new DateTime("now"), "Y-m-d"). '\'')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

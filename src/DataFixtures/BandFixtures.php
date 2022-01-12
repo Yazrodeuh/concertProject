@@ -28,14 +28,53 @@ class BandFixtures extends Fixture implements FixtureInterface, ContainerAwareIn
         $repConcert = $this->container->get("doctrine.orm.entity_manager")->getRepository(Concert::class);
 
         $band = new Band();
-
-        $band->setName("bandName1");
-        $band->setMembersNumber(3);
-        $band->setStyle("Rock");
-        $band->addArtist($repArtist->findOneBy(array("firstName" => "FirstName1")));
+        $artist = $repArtist->findOneBy(array('name' => 'Lukas Graham'));
+        $band->setName($artist->getName());
+        $band->setUrlName('lukasgraham');
+        $band->setMembersNumber(1);
+        $band->addArtist($artist);
         $band->setPicture(null);
-
         $manager->persist($band);
+
+        $band = new Band();
+        $artist = $repArtist->findOneBy(array('name' => 'Nekfeu'));
+        $band->setName($artist->getName());
+        $band->setUrlName('nekfeu');
+        $band->setMembersNumber(1);
+        $band->addArtist($artist);
+        $band->setPicture(null);
+        $manager->persist($band);
+
+        $band = new Band();
+        $artist = $repArtist->findOneBy(array('name' => 'Orelsan'));
+        $band->setName($artist->getName());
+        $band->setUrlName('orelsan');
+        $band->setMembersNumber(1);
+        $band->addArtist($artist);
+        $band->setPicture(null);
+        $manager->persist($band);
+
+        $band = new Band();
+        $artist = $repArtist->findOneBy(array('name' => 'Lomepal'));
+        $band->setName($artist->getName());
+        $band->setUrlName('lomepal');
+        $band->setMembersNumber(1);
+        $band->addArtist($artist);
+        $band->setPicture(null);
+        $manager->persist($band);
+
+        $band = new Band();
+        $artistDuaLipa = $repArtist->findOneBy(array('name' => 'Dua Lipa'));
+        $artistAngele = $repArtist->findOneBy(array('name' => 'Angèle'));
+        $band->setName($artistDuaLipa->getName() . ' - ' . $artistAngele->getName());
+        $band->setUrlName('dualipa-angele');
+        $band->setMembersNumber(1);
+        $band->addArtist($artistAngele);
+        $band->addArtist($artistDuaLipa);
+        $band->setPicture(null);
+        $manager->persist($band);
+
+
 
         $manager->flush();
     }

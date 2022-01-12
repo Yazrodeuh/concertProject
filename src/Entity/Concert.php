@@ -22,7 +22,7 @@ class Concert
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     private string $name;
 
@@ -39,25 +39,31 @@ class Concert
     private $bands;
 
     /**
-     * @ORM\ManyToOne (targetEntity="App\Entity\Room", inversedBy="concerts")
+     * @ORM\ManyToOne (targetEntity=Room::class, inversedBy="concerts")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $room;
+    private ?Room $room;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=5)
      */
-    private ?DateTimeInterface $startTime;
+    private String $startTime;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=5)
      */
-    private ?DateTimeInterface $endTime;
+    private String $endTime;
 
     /**
      * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="concerts")
      */
-    private $picture;
+    private ?Picture $picture;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private ?DateTimeInterface $day;
+
 
     /**
      *
@@ -65,7 +71,6 @@ class Concert
     public function __construct()
     {
         $this->bands = new ArrayCollection();
-        $this->rooms = new ArrayCollection();
     }
 
     /**
@@ -159,24 +164,24 @@ class Concert
         return $this;
     }
 
-    public function getStartTime(): ?DateTimeInterface
+    public function getStartTime(): ?String
     {
         return $this->startTime;
     }
 
-    public function setStartTime(DateTimeInterface $startTime): self
+    public function setStartTime(String $startTime): self
     {
         $this->startTime = $startTime;
 
         return $this;
     }
 
-    public function getEndTime(): ?DateTimeInterface
+    public function getEndTime(): ?String
     {
         return $this->endTime;
     }
 
-    public function setEndTime(DateTimeInterface $endTime): self
+    public function setEndTime(String $endTime): self
     {
         $this->endTime = $endTime;
 
@@ -194,5 +199,18 @@ class Concert
 
         return $this;
     }
+
+    public function getDay(): ?DateTimeInterface
+    {
+        return $this->day;
+    }
+
+    public function setDay(DateTimeInterface $day): self
+    {
+        $this->day = $day;
+
+        return $this;
+    }
+
 
 }

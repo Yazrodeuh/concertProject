@@ -38,7 +38,7 @@ class Picture
      * @ORM\OneToMany(targetEntity="App\Entity\Band", mappedBy="picture")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ArrayCollection $bands;
+    private $bands;
 
     /**
      * @ORM\OneToMany(targetEntity=Concert::class, mappedBy="picture")
@@ -51,6 +51,11 @@ class Picture
     private $rooms;
 
     /**
+     * @ORM\OneToMany(targetEntity=Artist::class, mappedBy="picture")
+     */
+    private $artists;
+
+    /**
      *
      */
     public function __construct()
@@ -58,6 +63,7 @@ class Picture
         $this->bands = new ArrayCollection();
         $this->concerts = new ArrayCollection();
         $this->rooms = new ArrayCollection();
+        $this->artists = new ArrayCollection();
     }
 
     /**
@@ -217,6 +223,36 @@ class Picture
             // set the owning side to null (unless already changed)
             if ($room->getPicture() === $this) {
                 $room->setPicture(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Artist[]
+     */
+    public function getArtists(): Collection
+    {
+        return $this->artists;
+    }
+
+    public function addArtist(Artist $artist): self
+    {
+        if (!$this->artists->contains($artist)) {
+            $this->artists[] = $artist;
+            $artist->setPicture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtist(Artist $artist): self
+    {
+        if ($this->artists->removeElement($artist)) {
+            // set the owning side to null (unless already changed)
+            if ($artist->getPicture() === $this) {
+                $artist->setPicture(null);
             }
         }
 

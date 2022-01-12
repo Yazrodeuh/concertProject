@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConcertController!{% endblock %}
+
+{% block body %}
+    <div class="container my-2 m-auto px-5">
+        <div class="text-center py-2">
+            <h1>Create new concert</h1>
+        </div>
+        <div class="m-5">
+            {{ form_start(formConcert) }}
+            <div class="row g-3 d-flex justify-content-center">
+                <div class="col-5">
+                    <div class="form-floating">
+                        {{ form_widget(formConcert.name) }}
+                        {{ form_label(formConcert.name) }}
+                        {{ form_errors(formConcert.name) }}
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-floating">
+                        {{ form_widget(formConcert.day) }}
+                        {{ form_label(formConcert.day) }}
+                        {{ form_errors(formConcert.day) }}
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-floating">
+                        {{ form_widget(formConcert.startTime) }}
+                        {{ form_label(formConcert.startTime) }}
+                        {{ form_errors(formConcert.startTime) }}
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-floating">
+                        {{ form_widget(formConcert.endTime) }}
+                        {{ form_label(formConcert.endTime) }}
+                        {{ form_errors(formConcert.endTime) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

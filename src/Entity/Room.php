@@ -25,16 +25,16 @@ class Room
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Concert", mappedBy="rooms")
+     * @ORM\OneToMany(targetEntity=Concert::class, mappedBy="room")
      * @ORM\JoinColumn(nullable=true)
      */
     private $concerts;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Organizer", inversedBy="rooms")
+     * @ORM\ManyToOne(targetEntity=Organizer::class, inversedBy="rooms")
      * @ORM\JoinColumn(nullable=true)
      */
-    private Organizer $organizer;
+    private ?Organizer $organizer;
 
     /**
      * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="rooms")
