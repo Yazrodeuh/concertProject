@@ -37,7 +37,7 @@ class Room
     private ?Organizer $organizer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="rooms")
+     * @ORM\OneToOne(targetEntity=Picture::class, inversedBy="rooms")
      */
     private $picture;
 

@@ -1,0 +1,7 @@
+<div class="d-flex flex-row justify-content-center m-3">
+    {% for message in app.session.flashbag.get('message') %}
+        <div class="alert alert-{{ app.session.get('statut') }} text-center" role="alert">
+            {{ message | raw }}
+        </div>
+    {% endfor %}
+</div>

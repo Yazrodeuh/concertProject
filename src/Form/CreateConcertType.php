@@ -43,13 +43,13 @@ class CreateConcertType extends AbstractType
                 ]
             ])
             ->add('day', DateType::class, [
-                'label' => 'Day',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Day'
-                ]
+                'widget' => 'single_text',
+                'format' => 'dd / MM / YYYY',
+                'html5' => false,
+                'placeholder' => 'Select a value',
             ])
 
+            //TODO Use EntityType::class
 
         ;
     }

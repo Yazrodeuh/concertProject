@@ -3,36 +3,110 @@
 namespace App\Controller;
 
 use App\Entity\Band;
+use App\Form\BandType;
+use App\Repository\BandRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/bands")
+ */
 class BandController extends AbstractController
 {
+
     /**
-     * @Route("/bands", name="bands_list")
+     * @Route("/", name="band_list", methods={"GET"})
+     *
+     * @param BandRepository $bandRepository
+     *
      * @return Response
      */
-    public function bandsAction(): Response
+    public function index(BandRepository $bandRepository): Response
     {
-        $bandsInfos = $this->getDoctrine()->getRepository(Band::class)->findAll();
-
         return $this->render('band/list.html.twig', [
-            'bandsInfo' => $bandsInfos
+            'bandsInfo' => $bandRepository->findAll(),
         ]);
     }
 
+
     /**
-     * @Route("/bands/{bandName}", name="band_show")
-     * @param string $bandName
+     * @Route("/create-a-band", name="band_new", methods={"GET", "POST"})
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function bandAction(string $bandName): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $bandInfos = $this->getDoctrine()->getManager()->getRepository(Band::class)->findOneBy(array("urlName" => $bandName));
+        $band = new Band();
+        $form = $this->createForm(BandType::class, $band);
+        $form->handleRequest($request);
 
-        return $this->render('band/show.html.twig', [
-            'bandInfos' => $bandInfos
+        $form->getErrors();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            dump($form->getData());
+
+            $entityManager->persist($band);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('band_list', [], Response::HTTP_SEE_OTHER);
+        }
+
+
+        return $this->renderForm('band_controller2/new.html.twig', [
+            'band' => $band,
+            'form' => $form,
         ]);
+    }
+
+    //#[Route('/{id}', name: 'band_controller2_show', methods: ['GET'])]
+
+    /**
+     * @Route("/{urlNameBand}", name="band_show")
+     *
+     * @param String $urlNameBand
+     * @param BandRepository $bandRepository
+     *
+     * @return Response
+     */
+    public function show(String $urlNameBand, BandRepository $bandRepository): Response
+    {
+        return $this->render('band/show.html.twig', [
+            'bandInfos' => $bandRepository->findOneBy(array('urlName' => $urlNameBand)),
+        ]);
+    }
+
+    //#[Route('/{id}/edit', name: 'band_controller2_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Band $band, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(BandType::class, $band);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('band_controller2_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('band_controller2/edit.html.twig', [
+            'band' => $band,
+            'form' => $form,
+        ]);
+    }
+
+    //#[Route('/{id}', name: 'band_controller2_delete', methods: ['POST'])]
+    public function delete(Request $request, Band $band, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$band->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($band);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('band_controller2_index', [], Response::HTTP_SEE_OTHER);
     }
 }

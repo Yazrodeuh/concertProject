@@ -53,7 +53,7 @@ class Band
     private $concerts;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", inversedBy="bands")
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", inversedBy="bands")
      * @ORM\JoinColumn(nullable=true)
      */
     private ?Picture $picture;

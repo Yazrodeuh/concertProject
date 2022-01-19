@@ -55,7 +55,7 @@ class Concert
     private String $endTime;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="concerts")
+     * @ORM\OneToOne(targetEntity=Picture::class, inversedBy="concerts")
      */
     private ?Picture $picture;
 

@@ -56,4 +56,14 @@ class ConcertRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+
+    public function findLastThreeConcert(){
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.day', 'ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
+
+
 }

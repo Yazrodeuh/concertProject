@@ -11,19 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ConcertController extends AbstractController
 {
-    /**
-     *
-     *
-     * @return Response
-     *
-     * @Route("/", name="homepage")
-     */
-    public function indexAction(): Response
-    {
-        return $this->render('concert/index.html.twig', [
-            'controller_name' => 'ConcertController',
-        ]);
-    }
 
     /**
      * Affiche une liste de concert

@@ -35,23 +35,27 @@ class Picture
     private string $url;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Band", mappedBy="picture")
+     * @ORM\OneToOne(targetEntity="App\Entity\Band", mappedBy="picture")
      * @ORM\JoinColumn(nullable=true)
      */
     private $bands;
 
     /**
-     * @ORM\OneToMany(targetEntity=Concert::class, mappedBy="picture")
+     * @ORM\OneToOne(targetEntity=Concert::class, mappedBy="picture")
+     * @ORM\JoinColumn(nullable=true)
+
      */
     private $concerts;
 
     /**
-     * @ORM\OneToMany(targetEntity=Room::class, mappedBy="picture")
+     * @ORM\OneToOne(targetEntity=Room::class, mappedBy="picture")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $rooms;
 
     /**
-     * @ORM\OneToMany(targetEntity=Artist::class, mappedBy="picture")
+     * @ORM\OneToOne(targetEntity=Artist::class, mappedBy="picture")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $artists;
 
@@ -60,10 +64,6 @@ class Picture
      */
     public function __construct()
     {
-        $this->bands = new ArrayCollection();
-        $this->concerts = new ArrayCollection();
-        $this->rooms = new ArrayCollection();
-        $this->artists = new ArrayCollection();
     }
 
     /**
@@ -255,6 +255,57 @@ class Picture
                 $artist->setPicture(null);
             }
         }
+
+        return $this;
+    }
+
+    public function setConcerts(?Concert $concerts): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($concerts === null && $this->concerts !== null) {
+            $this->concerts->setPicture(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($concerts !== null && $concerts->getPicture() !== $this) {
+            $concerts->setPicture($this);
+        }
+
+        $this->concerts = $concerts;
+
+        return $this;
+    }
+
+    public function setRooms(?Room $rooms): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($rooms === null && $this->rooms !== null) {
+            $this->rooms->setPicture(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($rooms !== null && $rooms->getPicture() !== $this) {
+            $rooms->setPicture($this);
+        }
+
+        $this->rooms = $rooms;
+
+        return $this;
+    }
+
+    public function setArtists(?Artist $artists): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($artists === null && $this->artists !== null) {
+            $this->artists->setPicture(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($artists !== null && $artists->getPicture() !== $this) {
+            $artists->setPicture($this);
+        }
+
+        $this->artists = $artists;
 
         return $this;
     }

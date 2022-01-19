@@ -2,8 +2,14 @@
 
 namespace App\Repository;
 
+use App\DataFixtures\ArtistFixtures;
+use App\Entity\Artist;
+use App\Entity\Band;
+use App\Entity\Concert;
 use App\Entity\Picture;
+use App\Entity\Room;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -47,4 +53,16 @@ class PictureRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function QBPictureNotUsed(): QueryBuilder
+    {
+        return $this->createQueryBuilder('picture')
+            ->leftJoin(Artist::class, 'a')
+            ->andWhere('a.picture is NULL');
+
+
+    }
+
+
 }

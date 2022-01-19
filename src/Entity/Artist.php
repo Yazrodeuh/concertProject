@@ -46,7 +46,7 @@ class Artist
     private $bands;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="artists")
+     * @ORM\OneToOne(targetEntity=Picture::class, inversedBy="artists")
      */
     private $picture;
 

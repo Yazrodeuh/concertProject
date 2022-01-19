@@ -1,17 +1,30 @@
 <div class="container">
-    <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">&copy; 2022 ConcertProject, Inc</p>
 
-        <ul class="nav col-md-4 justify-content-end">
-            <li class="nav-item">
-                <a href="{{ path('homepage') }}" class="nav-link px-2 text-muted">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ path('concert_archives') }}" class="nav-link px-2 text-muted">Archives</a>
-            </li>
-            {# <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li> #}
-        </ul>
+    <div class="row">
+        <div class="col-7 row">
+            <div class="col-auto d-flex align-items-center">
+                <a href="{{ path('homepage') }}" class="nav-link p-0 text-muted">Home</a>
+            </div>
+            <div class="col-auto d-flex align-items-center">
+                <a href="{{ path('concert_archives') }}" class="nav-link p-0 text-muted">Archives</a>
+            </div>
+
+        </div>
+
+        <div class="col-5">
+            <form>
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of whats new and exciting from us.</p>
+                <div class="d-flex w-100 gap-2">
+                    <label for="newsletter1" class="visually-hidden">Email address</label>
+                    <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                    <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between py-4 my-4 border-top border-3 border-light">
+        <p>© 2022 ConcertProject, Inc. All rights reserved.</p>
     </div>
 </div>
