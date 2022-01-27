@@ -106,9 +106,6 @@
     "egulias/email-validator": {
         "version": "3.1.2"
     },
-    "eternicode/bootstrap-datepicker": {
-        "version": "v1.9.0"
-    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },

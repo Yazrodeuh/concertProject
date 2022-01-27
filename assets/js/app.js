@@ -10,13 +10,6 @@ import '../styles/app.scss';
 const $ = require('jquery');
 const bootstrap = require('bootstrap');
 
-/*$(document).ready(function() {
-    // you may need to change this code if you are not using Bootstrap Datepicker
-    $('.js-datepicker').datepicker({
-        format: 'yyyy-mm-dd'
-    });
-});*/
-
 
 
 const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

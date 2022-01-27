@@ -12,13 +12,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/bands")
+ * @Route("/band")
  */
 class BandController extends AbstractController
 {
 
     /**
-     * @Route("/", name="band_list", methods={"GET"})
+     * @Route("/list", name="band_list", methods={"GET"})
+     *
+     * @param BandRepository $bandRepository
+     *
+     * @return Response
+     */
+    public function list(BandRepository $bandRepository): Response
+    {
+        return $this->render('band/list.html.twig', [
+            'bandsInfo' => $bandRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/", name="band_index", methods={"GET"})
      *
      * @param BandRepository $bandRepository
      *
@@ -26,14 +40,14 @@ class BandController extends AbstractController
      */
     public function index(BandRepository $bandRepository): Response
     {
-        return $this->render('band/list.html.twig', [
-            'bandsInfo' => $bandRepository->findAll(),
+        return $this->render('band/index.html.twig', [
+            'bands' => $bandRepository->findAll(),
         ]);
     }
 
 
     /**
-     * @Route("/create-a-band", name="band_new", methods={"GET", "POST"})
+     * @Route("/new", name="band_new", methods={"GET", "POST"})
      *
      * @param Request $request
      * @param EntityManagerInterface $entityManager
@@ -49,7 +63,7 @@ class BandController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dump($form->getData());
+            //dump($form->getData());
 
             $entityManager->persist($band);
             $entityManager->flush();
@@ -81,7 +95,14 @@ class BandController extends AbstractController
         ]);
     }
 
-    //#[Route('/{id}/edit', name: 'band_controller2_edit', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/{id}/edit", name="band_edit", methods={"GET", "POST"})
+     *
+     * @param Request $request
+     * @param Band $band
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     public function edit(Request $request, Band $band, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(BandType::class, $band);
@@ -90,10 +111,10 @@ class BandController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('band_controller2_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('band_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('band_controller2/edit.html.twig', [
+        return $this->renderForm('band/edit.html.twig', [
             'band' => $band,
             'form' => $form,
         ]);
@@ -107,6 +128,6 @@ class BandController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('band_controller2_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('band_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -20,6 +20,9 @@
                                 <h2>{{ band.name }}</h2>
                             </div>
                             <div class="card-body">
+                                {% if band.picture is not null %}
+                                    <img src="{{ band.picture.url }}" width="100%" alt="{{ band.picture.alternativeName }}">
+                                {% endif %}
                                 {% if band.style is not null %}
                                     <div>
                                         Style : {{ band.style }}

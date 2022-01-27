@@ -60,7 +60,7 @@ class ConcertController extends AbstractController
         $form = $this->createForm(CreateConcertType::class, $show);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $show = -$form->getData();
             $entityManager = $this->getDoctrine()->getManager();
@@ -74,8 +74,5 @@ class ConcertController extends AbstractController
             'formConcert' => $form->createView(),
         ]);
     }
-
-
-
 
 }

@@ -14,7 +14,7 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
-    .enableVueLoader()
+    //.enableVueLoader()
 
     /*
      * ENTRY CONFIG

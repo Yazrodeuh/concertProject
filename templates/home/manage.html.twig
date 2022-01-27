@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block main %}
+
+
+    <div class="container my-5">
+
+        <div class="row">
+            <div class="col-auto">
+                <a href="">Create a concert</a>
+            </div>
+            <div class="col-auto">
+                <a href="">Show the concert list</a>
+            </div>
+            <div class="col-auto">
+                <a href="">Create a band</a>
+            </div>
+            <div class="col-auto">
+                <a href="{{ path('band_index') }}">Show the band list</a>
+            </div>
+            <div class="col-auto">
+                <a href="{{ path('artist_new') }}">Create an artist</a>
+            </div>
+            <div class="col-auto">
+                <a href="{{ path('artist_index') }}">Show the artist list</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

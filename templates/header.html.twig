@@ -15,16 +15,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('bands_list') }}">Bands</a>
+                    <a class="nav-link" href="{{ path('band_list') }}">Bands</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('concert_list') }}">Concerts</a>
                 </li>
+                {% if app.user and "ROLE_ADMIN" in app.user.roles %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('manage') }}">Manage</a>
+                    </li>
+                {% endif %}
             </ul>
             {% if app.user %}
                 <div class="d-flex">
                      <div class="px-3">
-                         <a href="{{ path('homepage') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="See my profil">
+                         <a href="{{ path('user_index') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="See my profil">
                              <svg class="mb-1" width="24" height="24" fill="currentColor">
                                  <use xlink:href="#profil"></use>
                              </svg>
