@@ -3,8 +3,13 @@
 {% block title %}New Band{% endblock %}
 
 {% block body %}
-    <h1>Create new Band</h1>
+    <div class="container my-3">
+        <div class="text-center">
+            <h1>Create new Band</h1>
+        </div>
 
-   {% include '_form.html.twig' %}
+        {% include 'band/_form.html.twig' %}
+    </div>
+
 
 {% endblock %}

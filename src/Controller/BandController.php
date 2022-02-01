@@ -72,7 +72,7 @@ class BandController extends AbstractController
         }
 
 
-        return $this->renderForm('band_controller2/new.html.twig', [
+        return $this->renderForm('band/new.html.twig', [
             'band' => $band,
             'form' => $form,
         ]);

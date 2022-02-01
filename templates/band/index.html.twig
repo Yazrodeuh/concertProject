@@ -3,38 +3,37 @@
 {% block title %}Band index{% endblock %}
 
 {% block main %}
-    <h1>Band index</h1>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>MembersNumber</th>
-            <th>Style</th>
-            <th>UrlName</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for band in bands %}
+    <div class="container my-3">
+        <div class="text-center my-3">
+            <h1>Band index</h1>
+        </div>
+        <table class="table">
+            <thead>
             <tr>
-                <td>{{ band.id }}</td>
-                <td>{{ band.name }}</td>
-                <td>{{ band.membersNumber }}</td>
-                <td>{{ band.style }}</td>
-                <td>{{ band.urlName }}</td>
-                <td>
-                    <a href="{{ path('band_edit', {'id': band.id}) }}">edit</a>
-                </td>
+                <th>Name</th>
+                <th>MembersNumber</th>
+                <th>Style</th>
+                <th>UrlName</th>
+                <th>actions</th>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('band_new') }}">Create new</a>
+            </thead>
+            <tbody>
+            {% for band in bands %}
+                <tr>
+                    <td>{{ band.name }}</td>
+                    <td>{{ band.membersNumber }}</td>
+                    <td>{{ band.style }}</td>
+                    <td>{{ band.urlName }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('band_edit', {'id': band.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
