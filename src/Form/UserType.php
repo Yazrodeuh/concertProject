@@ -15,10 +15,18 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-
+                'label' => 'Email',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Email'
+                 ]
             ])
             ->add('password', PasswordType::class, [
-
+                'label' => 'Password',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Password'
+                ]
             ])
         ;
     }

@@ -1,4 +1,24 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div>
+    {{ form_start(form) }}
+    <div class="row g-5">
+        <div class="col-6">
+            <div class="form-floating">
+                {{ form_widget(form.email) }}
+                {{ form_label(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                {{ form_widget(form.password) }}
+                {{ form_label(form.password) }}
+                {{ form_errors(form.password) }}
+            </div>
+        </div>
+    </div>
+    <div class="text-center my-3">
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+    {{ form_end(form) }}
+
+</div>

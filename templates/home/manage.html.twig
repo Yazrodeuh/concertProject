@@ -7,27 +7,46 @@
 
     <div class="container my-5">
 
-        <div class="row">
-            <div class="col-auto">
-                <a href="">Create a concert</a>
+        <section class="my-3">
+            <div>
+                <h2>Concert</h2>
             </div>
-            <div class="col-auto">
-                <a href="">Show the concert list</a>
+            <div class="row">
+                <div class="col-2 text-center">
+                    <a class="btn btn-primary" href="">Create a concert</a>
+                </div>
+                <div class="col-2 text-center">
+                    <a class="btn btn-primary" href="">Show the concert list</a>
+                </div>
             </div>
-            <div class="col-auto">
-                <a href="">Create a band</a>
-            </div>
-            <div class="col-auto">
-                <a href="{{ path('band_index') }}">Show the band list</a>
-            </div>
-            <div class="col-auto">
-                <a href="{{ path('artist_new') }}">Create an artist</a>
-            </div>
-            <div class="col-auto">
-                <a href="{{ path('artist_index') }}">Show the artist list</a>
-            </div>
+        </section>
 
-        </div>
+        <section class="my-3">
+            <div>
+                <h2>Band</h2>
+            </div>
+            <div class="row">
+                <div class="col-2 text-center">
+                    <a class="btn btn-primary" href="">Create a band</a>
+                </div>
+                <div class="col-2 text-center">
+                    <a class="btn btn-primary" href="{{ path('band_index') }}">Show the band list</a>
+                </div>
+            </div>
+        </section>
+        <section class="my-3">
+            <div>
+                <h2>Artist</h2>
+            </div>
+            <div class="row">
+                <div class="col-2 text-center">
+                    <a class="btn btn-primary" href="{{ path('artist_new') }}">Create an artist</a>
+                </div>
+                <div class="col-2 text-center">
+                    <a class="btn btn-primary" href="{{ path('artist_index') }}">Show the artist list</a>
+                </div>
+            </div>
+        </section>
 
     </div>
 
