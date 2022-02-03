@@ -1,54 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ConcertController!{% endblock %}
+{% block title %}Concert index{% endblock %}
 
-{% block body %}
-
-
-    <div class="container my-5">
-
-        <div class="text-center bg-img-test position-relative">
-            <div class="position-absolute d-flex align-items-center h-100">
-                <h1 class="display-3">Concerts</h1>
-            </div>
-            <img src="{{ asset('img/concert/concert.jpg') }}" width="800rem" alt="">
+{% block main %}
+    <div class="container my-3">
+        <div class="text-center my-3">
+            <h1>Concert list</h1>
         </div>
-
-        <table class="table table-hover table-sm table-bordered">
-            <caption>List of concerts</caption>
-            <thead class="table-dark">
-            <tr class="text-center">
-                <th scope="col">Name</th>
-                <th scope="col">Bands</th>
-                <th scope="col">Day</th>
-                <th scope="col">Reserve</th>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Isfull</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Edit</th>
+                <th>Remove</th>
             </tr>
             </thead>
             <tbody>
             {% for concert in concerts %}
-                <tr class="m-2">
-                    <td class="align-middle p-2">{{ concert.name }}</td>
-                    <td class="align-middle">
-                        <ul class="mb-0">
-                            {% for band in concert.bands %}
-                                <li>
-                                    {{ band.name }} <a href="{{ path('band_show', {'urlName': band.urlname}) }}">learn
-                                        more</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                <tr>
+                    <td>{{ concert.name }}</td>
+                    <td>{{ concert.full }}</td>
+                    <td>{{ concert.startTime }}</td>
+                    <td>{{ concert.endTime }}</td>
+                    <td>
+                        <a class="btn btn-warning" href="{{ path('concert_edit', {'id': concert.id}) }}">edit</a>
                     </td>
-                    <td class="text-center align-middle">{{ concert.day | date('d/m/Y') }}</td>
-                    <td class="text-center align-middle">
-                        <a class="btn btn-primary" href="{{ path('concert_show', {'urlName': concert.urlName}) }}">Reserve</a>
+                    <td>
+                        {% include 'concert/_delete.html.twig' %}
                     </td>
                 </tr>
-
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
             {% endfor %}
-
             </tbody>
         </table>
     </div>
-
-
 {% endblock %}

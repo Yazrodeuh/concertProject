@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Concert{% endblock %}
+
+{% block body %}
+    <h1>Edit Band</h1>
+
+    {{ include('concert/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

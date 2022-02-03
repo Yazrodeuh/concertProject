@@ -19,13 +19,15 @@ class BandController extends AbstractController
 {
 
     /**
+     * TODO add description
+     *
      * @Route("/", name="band_index", methods={"GET"})
      *
      * @param BandRepository $bandRepository
      *
      * @return Response
      */
-    public function index(BandRepository $bandRepository): Response
+    public function indexAction(BandRepository $bandRepository): Response
     {
         return $this->render('band/index.html.twig', [
             'bands' => $bandRepository->findAll(),
@@ -42,7 +44,7 @@ class BandController extends AbstractController
      *
      * @return Response
      */
-    public function list(BandRepository $bandRepository): Response
+    public function listAction(BandRepository $bandRepository): Response
     {
         return $this->render('band/list.html.twig', [
             'bands' => $bandRepository->findAll(),
@@ -60,7 +62,7 @@ class BandController extends AbstractController
      *
      * @return Response
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function newAction(Request $request, EntityManagerInterface $entityManager): Response
     {
         $band = new Band();
         $form = $this->createForm(BandType::class, $band);
@@ -97,7 +99,7 @@ class BandController extends AbstractController
      *
      * @return Response
      */
-    public function show(string $urlName, BandRepository $bandRepository): Response
+    public function showAction(string $urlName, BandRepository $bandRepository): Response
     {
         return $this->render('band/show.html.twig', [
             'bandInfos' => $bandRepository->findOneBy(array('urlName' => $urlName)),
@@ -116,7 +118,7 @@ class BandController extends AbstractController
      *
      * @return Response
      */
-    public function edit(Request $request, Band $band, EntityManagerInterface $entityManager): Response
+    public function editAction(Request $request, Band $band, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(BandType::class, $band);
         $form->handleRequest($request);
@@ -146,7 +148,7 @@ class BandController extends AbstractController
      *
      * @return Response
      */
-    public function delete(Request $request, Band $band, EntityManagerInterface $entityManager): Response
+    public function deleteAction(Request $request, Band $band, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $band->getId(), $request->request->get('_token'))) {
             $entityManager->remove($band);

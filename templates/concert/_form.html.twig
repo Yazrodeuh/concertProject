@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+<div class="row g-3 d-flex justify-content-center">
+    <div class="col-5">
+        <div class="form-floating">
+            {{ form_widget(form.name) }}
+            {{ form_label(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-floating">
+            {{ form_widget(form.day) }}
+            {{ form_label(form.day) }}
+            {{ form_errors(form.day) }}
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-floating">
+            {{ form_widget(form.startTime) }}
+            {{ form_label(form.startTime) }}
+            {{ form_errors(form.startTime) }}
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-floating">
+            {{ form_widget(form.endTime) }}
+            {{ form_label(form.endTime) }}
+            {{ form_errors(form.endTime) }}
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
+{{ form_end(form) }}
