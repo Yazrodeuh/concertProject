@@ -18,7 +18,7 @@
                     <a class="nav-link" href="{{ path('band_list') }}">Bands</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('concert_list') }}">Concerts</a>
+                    <a class="nav-link" href="{{ path('concert_index') }}">Concerts</a>
                 </li>
                 {% if app.user and "ROLE_ADMIN" in app.user.roles %}
                     <li class="nav-item">

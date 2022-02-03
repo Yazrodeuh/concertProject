@@ -14,8 +14,7 @@ class PictureType extends AbstractType
         $builder
             ->add('name')
             ->add('alternativeName')
-            ->add('url')
-        ;
+            ->add('url');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

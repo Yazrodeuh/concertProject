@@ -47,12 +47,12 @@ class Concert
     /**
      * @ORM\Column(type="string", length=5)
      */
-    private String $startTime;
+    private string $startTime;
 
     /**
      * @ORM\Column(type="string", length=5)
      */
-    private String $endTime;
+    private string $endTime;
 
     /**
      * @ORM\OneToOne(targetEntity=Picture::class, inversedBy="concerts")
@@ -63,6 +63,11 @@ class Concert
      * @ORM\Column(type="date")
      */
     private ?DateTimeInterface $day;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $urlName;
 
 
     /**
@@ -164,24 +169,24 @@ class Concert
         return $this;
     }
 
-    public function getStartTime(): ?String
+    public function getStartTime(): ?string
     {
         return $this->startTime;
     }
 
-    public function setStartTime(String $startTime): self
+    public function setStartTime(string $startTime): self
     {
         $this->startTime = $startTime;
 
         return $this;
     }
 
-    public function getEndTime(): ?String
+    public function getEndTime(): ?string
     {
         return $this->endTime;
     }
 
-    public function setEndTime(String $endTime): self
+    public function setEndTime(string $endTime): self
     {
         $this->endTime = $endTime;
 
@@ -208,6 +213,18 @@ class Concert
     public function setDay(DateTimeInterface $day): self
     {
         $this->day = $day;
+
+        return $this;
+    }
+
+    public function getUrlName(): ?string
+    {
+        return $this->urlName;
+    }
+
+    public function setUrlName(string $urlName): self
+    {
+        $this->urlName = $urlName;
 
         return $this;
     }

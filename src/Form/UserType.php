@@ -19,7 +19,7 @@ class UserType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Email'
-                 ]
+                ]
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Password',
@@ -27,8 +27,7 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                     'placeholder' => 'Password'
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

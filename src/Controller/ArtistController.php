@@ -71,7 +71,7 @@ class ArtistController extends AbstractController
     #[Route('/{id}', name: 'artist_delete', methods: ['POST'])]
     public function delete(Request $request, Artist $artist, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$artist->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $artist->getId(), $request->request->get('_token'))) {
             $entityManager->remove($artist);
             $entityManager->flush();
         }

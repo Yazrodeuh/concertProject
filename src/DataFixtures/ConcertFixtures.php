@@ -7,7 +7,6 @@ use App\Entity\Concert;
 use App\Entity\Picture;
 use App\Entity\Room;
 use DateTime;
-use App\DataFixtures\PictureFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -25,6 +24,7 @@ class ConcertFixtures extends Fixture implements FixtureInterface, DependentFixt
         $concert = new Concert();
         $band = $repBand->findOneBy(array("urlName" =>"dualipa-angele"));
         $concert->setName("Dua Lipa et Angèle en concert");
+        $concert->setUrlName("dualipa-et-angele-en-concert");
         $concert->setFull(false);
         $concert->addBand($band);
         $concert->setRoom($repRoom->findOneBy(array("name"=> "room1")));
@@ -37,6 +37,7 @@ class ConcertFixtures extends Fixture implements FixtureInterface, DependentFixt
         $concert = new Concert();
         $band = $repBand->findOneBy(array("urlName" =>"raper-le-fromage"));
         $concert->setName("Raper le fromage en Gruillère");
+        $concert->setUrlName("raper-le-fromage-en-gruillere");
         $concert->setFull(false);
         $concert->addBand($band);
         $concert->setRoom($repRoom->findOneBy(array("name"=> "room2")));

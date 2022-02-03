@@ -4,8 +4,6 @@ namespace App\Form;
 
 use App\Entity\Artist;
 use App\Entity\Band;
-use App\Entity\Picture;
-use App\Repository\PictureRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,8 +23,7 @@ class BandType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true
             ])
-            ->add('picture', PictureType::class)
-        ;
+            ->add('picture', PictureType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

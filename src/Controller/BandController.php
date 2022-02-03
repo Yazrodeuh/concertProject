@@ -81,17 +81,17 @@ class BandController extends AbstractController
     //#[Route('/{id}', name: 'band_controller2_show', methods: ['GET'])]
 
     /**
-     * @Route("/{urlNameBand}", name="band_show")
+     * @Route("/{urlName}", name="band_show")
      *
-     * @param String $urlNameBand
+     * @param String $urlName
      * @param BandRepository $bandRepository
      *
      * @return Response
      */
-    public function show(String $urlNameBand, BandRepository $bandRepository): Response
+    public function show(string $urlName, BandRepository $bandRepository): Response
     {
         return $this->render('band/show.html.twig', [
-            'bandInfos' => $bandRepository->findOneBy(array('urlName' => $urlNameBand)),
+            'bandInfos' => $bandRepository->findOneBy(array('urlName' => $urlName)),
         ]);
     }
 
@@ -123,7 +123,7 @@ class BandController extends AbstractController
     //#[Route('/{id}', name: 'band_controller2_delete', methods: ['POST'])]
     public function delete(Request $request, Band $band, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$band->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $band->getId(), $request->request->get('_token'))) {
             $entityManager->remove($band);
             $entityManager->flush();
         }

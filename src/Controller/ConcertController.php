@@ -3,71 +3,90 @@
 namespace App\Controller;
 
 use App\Entity\Concert;
-use App\Form\CreateConcertType;
+use App\Form\ConcertType;
+use App\Repository\BandRepository;
+use App\Repository\ConcertRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/concert")
+ */
 class ConcertController extends AbstractController
 {
 
     /**
      * Affiche une liste de concert
      *
+     * @param ConcertRepository $concertRepository
      * @return Response
      *
-     * @Route("/concert", name="concert_list")
+     * @Route("/", name="concert_index")
      */
-    public function listAction(): Response
+    public function list(ConcertRepository $concertRepository): Response
     {
-        $repConcert = $this->getDoctrine()->getRepository(Concert::class)->findAll();
-
         return $this->render('concert/list.html.twig', [
-            'concerts' => $repConcert,
+            'concerts' => $concertRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/{urlName}", name="concert_show")
+     *
+     * @param String $urlName
+     * @param ConcertRepository $concertRepository
+     * @return Response
+     */
+    public function show(string $urlName, ConcertRepository $concertRepository): Response
+    {
+        return $this->render('concert/show.html.twig', [
+            'bandInfos' => $concertRepository->findOneBy(array('urlName' => $urlName)),
         ]);
     }
 
     /**
      * Affiche une liste de concert
-     *
-     * @return Response
      *
      * @Route("/archives", name="concert_archives")
+     *
+     * @param ConcertRepository $concertRepository
+     *
+     * @return Response
      */
-    public function archivesAction(): Response
+    public function archives(ConcertRepository $concertRepository): Response
     {
-        $repConcert = $this->getDoctrine()->getRepository(Concert::class)->findOldConcert();
-
         return $this->render('concert/archives.html.twig', [
-            'oldConcert' => $repConcert,
+            'oldConcert' => $concertRepository->findOldConcert(),
         ]);
     }
 
     /**
      * Affiche une liste de concert
      *
+     * @Route("/new", name="concert_new", methods={"GET", "POST"})
+     *
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      *
-     * @Route("/concert/create", name="concert_create")
      */
-    public function createConcertAction(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
 
-        $show = new Concert();
+        $concert = new Concert();
 
-        $form = $this->createForm(CreateConcertType::class, $show);
+        $form = $this->createForm(ConcertType::class, $concert);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $show = -$form->getData();
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($show);
+            $entityManager->persist($concert);
             $entityManager->flush();
 
-            //return $this->redirectToRoute('concer_success');
+            return $this->redirectToRoute('concer_success');
         }
 
         return $this->render('concert/new.html.twig', [

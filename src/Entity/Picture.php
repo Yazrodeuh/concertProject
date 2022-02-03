@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\PictureRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,7 +42,6 @@ class Picture
     /**
      * @ORM\OneToOne(targetEntity=Concert::class, mappedBy="picture")
      * @ORM\JoinColumn(nullable=true)
-
      */
     private $concerts;
 
@@ -177,6 +175,23 @@ class Picture
         return $this->concerts;
     }
 
+    public function setConcerts(?Concert $concerts): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($concerts === null && $this->concerts !== null) {
+            $this->concerts->setPicture(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($concerts !== null && $concerts->getPicture() !== $this) {
+            $concerts->setPicture($this);
+        }
+
+        $this->concerts = $concerts;
+
+        return $this;
+    }
+
     public function addConcert(Concert $concert): self
     {
         if (!$this->concerts->contains($concert)) {
@@ -205,6 +220,23 @@ class Picture
     public function getRooms(): Collection
     {
         return $this->rooms;
+    }
+
+    public function setRooms(?Room $rooms): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($rooms === null && $this->rooms !== null) {
+            $this->rooms->setPicture(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($rooms !== null && $rooms->getPicture() !== $this) {
+            $rooms->setPicture($this);
+        }
+
+        $this->rooms = $rooms;
+
+        return $this;
     }
 
     public function addRoom(Room $room): self
@@ -237,6 +269,23 @@ class Picture
         return $this->artists;
     }
 
+    public function setArtists(?Artist $artists): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($artists === null && $this->artists !== null) {
+            $this->artists->setPicture(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($artists !== null && $artists->getPicture() !== $this) {
+            $artists->setPicture($this);
+        }
+
+        $this->artists = $artists;
+
+        return $this;
+    }
+
     public function addArtist(Artist $artist): self
     {
         if (!$this->artists->contains($artist)) {
@@ -255,57 +304,6 @@ class Picture
                 $artist->setPicture(null);
             }
         }
-
-        return $this;
-    }
-
-    public function setConcerts(?Concert $concerts): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($concerts === null && $this->concerts !== null) {
-            $this->concerts->setPicture(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($concerts !== null && $concerts->getPicture() !== $this) {
-            $concerts->setPicture($this);
-        }
-
-        $this->concerts = $concerts;
-
-        return $this;
-    }
-
-    public function setRooms(?Room $rooms): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($rooms === null && $this->rooms !== null) {
-            $this->rooms->setPicture(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($rooms !== null && $rooms->getPicture() !== $this) {
-            $rooms->setPicture($this);
-        }
-
-        $this->rooms = $rooms;
-
-        return $this;
-    }
-
-    public function setArtists(?Artist $artists): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($artists === null && $this->artists !== null) {
-            $this->artists->setPicture(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($artists !== null && $artists->getPicture() !== $this) {
-            $artists->setPicture($this);
-        }
-
-        $this->artists = $artists;
 
         return $this;
     }

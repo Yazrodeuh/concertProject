@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Artist;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,8 +18,7 @@ class ArtistType extends AbstractType
             ->add('birthday', DateType::class, [
 
             ])
-            ->add('picture', PictureType::class)
-        ;
+            ->add('picture', PictureType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

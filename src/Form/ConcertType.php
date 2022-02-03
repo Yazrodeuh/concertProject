@@ -4,14 +4,13 @@ namespace App\Form;
 
 use App\Entity\Concert;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CreateConcertType extends AbstractType
+class ConcertType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -47,9 +46,7 @@ class CreateConcertType extends AbstractType
                 'format' => 'dd / MM / YYYY',
                 'html5' => false,
                 'placeholder' => 'Select a value',
-            ])
-
-            //TODO Use EntityType::class
+            ])//TODO Use EntityType::class
 
         ;
     }
