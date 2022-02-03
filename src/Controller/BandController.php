@@ -6,6 +6,7 @@ use App\Entity\Band;
 use App\Form\BandType;
 use App\Repository\BandRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,20 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BandController extends AbstractController
 {
-
-    /**
-     * @Route("/list", name="band_list", methods={"GET"})
-     *
-     * @param BandRepository $bandRepository
-     *
-     * @return Response
-     */
-    public function list(BandRepository $bandRepository): Response
-    {
-        return $this->render('band/list.html.twig', [
-            'bandsInfo' => $bandRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/", name="band_index", methods={"GET"})
@@ -45,12 +32,32 @@ class BandController extends AbstractController
         ]);
     }
 
+    /**
+     * TODO add description
+     *
+     * @Route("/list", name="band_list", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
+     *
+     * @param BandRepository $bandRepository
+     *
+     * @return Response
+     */
+    public function list(BandRepository $bandRepository): Response
+    {
+        return $this->render('band/list.html.twig', [
+            'bands' => $bandRepository->findAll(),
+        ]);
+    }
 
     /**
+     * TODO add description + front
+     *
      * @Route("/new", name="band_new", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
      *
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     *
      * @return Response
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -59,18 +66,19 @@ class BandController extends AbstractController
         $form = $this->createForm(BandType::class, $band);
         $form->handleRequest($request);
 
-        $form->getErrors();
-
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //dump($form->getData());
+            //TODO attention aux images
 
             $entityManager->persist($band);
             $entityManager->flush();
 
-            return $this->redirectToRoute('band_list', [], Response::HTTP_SEE_OTHER);
-        }
+            $session = $request->getSession();
+            $session->getFlashBag()->add('message', 'The band has been created !');
+            $session->set('statut', 'success');
 
+            return $this->redirectToRoute('band_list');
+        }
 
         return $this->renderForm('band/new.html.twig', [
             'band' => $band,
@@ -78,10 +86,11 @@ class BandController extends AbstractController
         ]);
     }
 
-    //#[Route('/{id}', name: 'band_controller2_show', methods: ['GET'])]
 
     /**
-     * @Route("/{urlName}", name="band_show")
+     * TODO add description
+     *
+     * @Route("/{urlName}", name="band_show", methods={"GET"})
      *
      * @param String $urlName
      * @param BandRepository $bandRepository
@@ -96,11 +105,15 @@ class BandController extends AbstractController
     }
 
     /**
+     * TODO add description
+     *
      * @Route("/{id}/edit", name="band_edit", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
      *
      * @param Request $request
      * @param Band $band
      * @param EntityManagerInterface $entityManager
+     *
      * @return Response
      */
     public function edit(Request $request, Band $band, EntityManagerInterface $entityManager): Response
@@ -111,7 +124,7 @@ class BandController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('band_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('band_list');
         }
 
         return $this->renderForm('band/edit.html.twig', [
@@ -120,7 +133,19 @@ class BandController extends AbstractController
         ]);
     }
 
-    //#[Route('/{id}', name: 'band_controller2_delete', methods: ['POST'])]
+
+    /**
+     * TODO add description
+     *
+     * @Route("/{id}", name="band_delete", methods={"POST"})
+     * @IsGranted("ROLE_ADMIN")
+     *
+     * @param Request $request
+     * @param Band $band
+     * @param EntityManagerInterface $entityManager
+     *
+     * @return Response
+     */
     public function delete(Request $request, Band $band, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $band->getId(), $request->request->get('_token'))) {
@@ -128,6 +153,6 @@ class BandController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('band_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('band_list');
     }
 }

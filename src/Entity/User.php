@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var array
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="array")
      */
     private array $roles = [];
 
@@ -95,7 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = self::ROLE_USER;
 
         return array_unique($roles);
     }

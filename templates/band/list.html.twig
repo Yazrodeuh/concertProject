@@ -1,45 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ConcertController!{% endblock %}
+{% block title %}Band index{% endblock %}
 
-{% block body %}
-
-
-    <div class="container">
-
-        <div class="my-2 text-center">
-            <h1>Bands</h1>
+{% block main %}
+    <div class="container my-3">
+        <div class="text-center my-3">
+            <h1>Band index</h1>
         </div>
-
-        <div>
-            <div class="w-100 d-flex justify-content-start row g-4 m-auto py-3">
-                {% for band in bandsInfo %}
-                    <div class="col-xl-4  col-lg-6 col-sm-12">
-                        <div class="card h-100 border">
-                            <div class="card-header text-center">
-                                <h2>{{ band.name }}</h2>
-                            </div>
-                            <div class="card-body">
-                                {% if band.picture is not null %}
-                                    <img src="{{ band.picture.url }}" width="100%" alt="{{ band.picture.alternativeName }}">
-                                {% endif %}
-                                {% if band.style is not null %}
-                                    <div>
-                                        Style : {{ band.style }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class="card-footer">
-                                <a href="{{ path('band_show', {"urlNameBand": (band.urlName) }) }}">Learn more</a>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-
-
-        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>MembersNumber</th>
+                <th>Style</th>
+                <th>UrlName</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for band in bands %}
+                <tr>
+                    <td>{{ band.name }}</td>
+                    <td>{{ band.membersNumber }}</td>
+                    <td>{{ band.style }}</td>
+                    <td>{{ band.urlName }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('band_edit', {'id': band.id}) }}">edit</a>
+                    </td>
+                    <td>
+                        {% include 'band/_delete_form.html.twig' %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-
 {% endblock %}

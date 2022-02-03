@@ -1,39 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Band index{% endblock %}
+{% block title %} Bands {% endblock %}
 
-{% block main %}
-    <div class="container my-3">
-        <div class="text-center my-3">
-            <h1>Band index</h1>
+{% block body %}
+    <div class="container">
+        <div class="my-2 text-center">
+            <h1>Bands</h1>
         </div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>MembersNumber</th>
-                <th>Style</th>
-                <th>UrlName</th>
-                <th>actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for band in bands %}
-                <tr>
-                    <td>{{ band.name }}</td>
-                    <td>{{ band.membersNumber }}</td>
-                    <td>{{ band.style }}</td>
-                    <td>{{ band.urlName }}</td>
-                    <td>
-                        <a class="btn btn-primary" href="{{ path('band_edit', {'id': band.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div>
+            <div class="w-100 d-flex justify-content-start row g-4 m-auto py-3">
+                {% for band in bands %}
+                    <div class="col-xl-4  col-lg-6 col-sm-12">
+                        <div class="card h-100 border">
+                            <div class="card-header text-center">
+                                <h2>{{ band.name }}</h2>
+                            </div>
+                            <div class="card-body">
+                                {% if band.picture is not null %}
+                                    <img src="{{ band.picture.url }}" width="100%"
+                                         alt="{{ band.picture.alternativeName }}">
+                                {% endif %}
+                                {% if band.style is not null %}
+                                    <div>
+                                        Style : {{ band.style }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ path('band_show', {"urlName": (band.urlName) }) }}">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -43,7 +43,7 @@ class ConcertController extends AbstractController
     public function show(string $urlName, ConcertRepository $concertRepository): Response
     {
         return $this->render('concert/show.html.twig', [
-            'bandInfos' => $concertRepository->findOneBy(array('urlName' => $urlName)),
+            'concert' => $concertRepository->findOneBy(array('urlName' => $urlName)),
         ]);
     }
 

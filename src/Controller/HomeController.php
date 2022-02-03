@@ -11,20 +11,31 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="homepage")
+     * TODO add description
+     *
+     * @Route("/", name="homepage", methods={"GET"})
+     *
+     * @param ConcertRepository $concertRepository
+     *
+     * @return Response
      */
     public function homepageAction(ConcertRepository $concertRepository): Response
     {
-        return $this->render('home/homepage.html.twig', ['concerts' => $concertRepository->findLastThreeConcert()]);
+        return $this->render('home/homepage.html.twig', [
+            'concerts' => $concertRepository->findLastThreeConcert()
+        ]);
     }
 
     /**
-     * @Route("/manage", name="manage")
+     * TODO add description
+     *
+     * @Route("/manage", name="manage", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
+     *
+     * @return Response
      */
     public function manageAction(): Response
     {
-
         return $this->render('home/manage.html.twig', []);
     }
 }
