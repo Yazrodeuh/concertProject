@@ -21,6 +21,8 @@ class UserFixtures extends Fixture implements FixtureInterface
     {
         //ADMIN
         $user = new User();
+        $user->setFirstName('Admin');
+        $user->setLastName('ISTRATEUR');
         $user->setEmail('admin@iut.fr');
         $user->setPassword(
             self::getUserPasswordHasher()->hashPassword($user, 'admin')
@@ -30,6 +32,8 @@ class UserFixtures extends Fixture implements FixtureInterface
 
         //user
         $user = new User();
+        $user->setFirstName('Use');
+        $user->setLastName('R');
         $user->setEmail('user@iut.fr');
         $user->setPassword(
             self::getUserPasswordHasher()->hashPassword($user, 'user')
