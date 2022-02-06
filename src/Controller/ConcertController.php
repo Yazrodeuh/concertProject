@@ -91,6 +91,22 @@ class ConcertController extends AbstractController
     }
 
     /**
+     * Affiche une liste de concert
+     *
+     * @Route("/archives", name="concert_archives")
+     *
+     * @param ConcertRepository $concertRepository
+     *
+     * @return Response
+     */
+    public function archives(ConcertRepository $concertRepository): Response
+    {
+        return $this->render('concert/archives.html.twig', [
+            'oldConcert' => $concertRepository->findOldConcert(),
+        ]);
+    }
+
+    /**
      * @Route("/{urlName}", name="concert_show", methods={"GET"})
      *
      * @param String $urlName
@@ -156,21 +172,7 @@ class ConcertController extends AbstractController
         return $this->redirectToRoute('concert_list');
     }
 
-    /**
-     * Affiche une liste de concert
-     *
-     * @Route("/archives", name="concert_archives")
-     *
-     * @param ConcertRepository $concertRepository
-     *
-     * @return Response
-     */
-    public function archives(ConcertRepository $concertRepository): Response
-    {
-        return $this->render('concert/archives.html.twig', [
-            'oldConcert' => $concertRepository->findOldConcert(),
-        ]);
-    }
+
 
 
 
