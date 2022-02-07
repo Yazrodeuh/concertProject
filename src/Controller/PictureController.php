@@ -78,4 +78,11 @@ class PictureController extends AbstractController
 
         return $this->redirectToRoute('picture_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    public static function upload($name, $file)
+    {
+        $emplacement = "/img/upload";
+        $file->move($emplacement, $name);
+
+    }
 }

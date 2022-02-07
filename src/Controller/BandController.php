@@ -72,6 +72,8 @@ class BandController extends AbstractController
 
             //TODO attention aux images
 
+            PictureController::upload($form->get('name')->getData(), $form->get('image')->getData());
+
             $entityManager->persist($band);
             $entityManager->flush();
 
