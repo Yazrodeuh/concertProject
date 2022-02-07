@@ -42,6 +42,11 @@ class Room
     private $picture;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $address;
+
+    /**
      *
      */
     public function __construct()
@@ -135,6 +140,18 @@ class Room
     public function setPicture(?Picture $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

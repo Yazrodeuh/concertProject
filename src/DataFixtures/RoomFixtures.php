@@ -18,11 +18,13 @@ class RoomFixtures extends Fixture implements FixtureInterface, DependentFixture
 
         $room = new Room();
         $room->setName("room1");
+        $room->setAddress('34 rue perdu');
         $room->setOrganizer($repOrganizer->findOneBy(array('name' => "organizer1")));
         $manager->persist($room);
 
         $room = new Room();
         $room->setName("room2");
+        $room->setAddress('35 rue Trouvé');
         $room->setOrganizer($repOrganizer->findOneBy(array('name' => "organizer1")));
         $manager->persist($room);
 
