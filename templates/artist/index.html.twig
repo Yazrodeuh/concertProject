@@ -3,37 +3,42 @@
 {% block title %}Artist index{% endblock %}
 
 {% block body %}
-    <h1>Artist index</h1>
-
-    <table class="table">
-        <thead>
+    <div class="container my-3">
+        <div class="text-center my-3">
+            <h1>Artist index</h1>
+        </div>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
-                <th>Job</th>
-                <th>Birthday</th>
-                <th>actions</th>
+                <th>Edit</th>
+                <th>Remove</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for artist in artists %}
-            <tr>
-                <td>{{ artist.id }}</td>
-                <td>{{ artist.name }}</td>
-                <td>{{ artist.job }}</td>
-                <td>{{ artist.birthday ? artist.birthday|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('artist_show', {'id': artist.id}) }}">show</a>
-                    <a href="{{ path('artist_edit', {'id': artist.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for artist in artists %}
+                <tr>
+                    <td>{{ artist.id }}</td>
+                    <td>{{ artist.name }}</td>
+                    <td>{{ artist.job }}</td>
+                    <td>{{ artist.birthday ? artist.birthday|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <a class="btn btn-warning" href="{{ path('artist_edit', {'id': artist.id}) }}">edit</a>
+                    </td>
+                    <td>
+                        {% include 'artist/_delete_form.html.twig' %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('artist_new') }}">Create new</a>
+
+
+
 {% endblock %}

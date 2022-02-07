@@ -11,10 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/artist')]
+
+/**
+ * @Route("/artist")
+ */
 class ArtistController extends AbstractController
 {
-    #[Route('/', name: 'artist_index', methods: ['GET'])]
+    /**
+     * @Route("/", name="artist_index", methods={"GET"})
+     */
     public function index(ArtistRepository $artistRepository): Response
     {
         return $this->render('artist/index.html.twig', [
@@ -22,7 +27,9 @@ class ArtistController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'artist_new', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/new", name="artist_new", methods={"GET", "POST"})
+     */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $artist = new Artist();
@@ -42,7 +49,9 @@ class ArtistController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'artist_show', methods: ['GET'])]
+    /**
+     * @Route("/{id}", name="artist_show", methods={"GET"})
+     */
     public function show(Artist $artist): Response
     {
         return $this->render('artist/show.html.twig', [
@@ -50,7 +59,9 @@ class ArtistController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'artist_edit', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/{id}/edit", "artist_edit", methods={"GET", "POST"})
+     */
     public function edit(Request $request, Artist $artist, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ArtistType::class, $artist);
@@ -68,7 +79,9 @@ class ArtistController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'artist_delete', methods: ['POST'])]
+    /**
+     * @Route("/{id}", name="artist_delete", methods={"POST"})
+     */
     public function delete(Request $request, Artist $artist, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $artist->getId(), $request->request->get('_token'))) {

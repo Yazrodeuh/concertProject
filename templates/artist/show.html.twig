@@ -3,10 +3,15 @@
 {% block title %}Artist{% endblock %}
 
 {% block body %}
-    <h1>Artist</h1>
 
-    <table class="table">
-        <tbody>
+    <div class="container">
+
+        <div class="my-2 text-center">
+            <h1>{{ artist.name }}</h1>
+        </div>
+
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ artist.id }}</td>
@@ -23,12 +28,7 @@
                 <th>Birthday</th>
                 <td>{{ artist.birthday ? artist.birthday|date('Y-m-d') : '' }}</td>
             </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('artist_index') }}">back to list</a>
-
-    <a href="{{ path('artist_edit', {'id': artist.id}) }}">edit</a>
-
-    {{ include('artist/_delete.html.twig') }}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
