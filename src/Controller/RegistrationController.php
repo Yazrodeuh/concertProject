@@ -28,6 +28,13 @@ class RegistrationController extends AbstractController
      *
      * @Route("/register", name="app_register")
      *
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param UserAuthenticatorInterface $userAuthenticator
+     * @param CustomAuthenticator $authenticator
+     * @param EntityManagerInterface $entityManager
+     *
+     * @return Response
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, CustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
